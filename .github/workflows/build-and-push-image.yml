@@ -25,9 +25,9 @@ on:
         required: true
         description: "The project name in image registry"
     secrets:
-      HARBOR_USERNAME:
+      REGISTRY_USERNAME:
         required: true
-      HARBOR_TOKEN:
+      REGISTRY_TOKEN:
         required: true
 
 jobs:
