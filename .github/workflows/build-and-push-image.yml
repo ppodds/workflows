@@ -38,18 +38,12 @@ jobs:
       - name: Show inputs
         run: |
           echo "::group::inputs"
-          echo "image_name: ${{ inputs.image_name }}"
-          echo "dockerfile: ${{ inputs.dockerfile }}"
-          echo "registry: ${{ inputs.registry }}"
-          echo "image_tag: ${{ inputs.image_tag }}"
-          echo "project_name: ${{ inputs.project_name }}"    
-          echo "::endgroup::"
-      - name: Show secrets
-        run: |
-          echo "::group::secrets"
-          echo "REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}"
-          echo "REGISTRY_TOKEN: ${{ secrets.REGISTRY_TOKEN }}" 
-          echo "::endgroup::"
+          echo 'image_name: ${{ inputs.image_name }}'
+          echo 'dockerfile: ${{ inputs.dockerfile }}'
+          echo 'registry: ${{ inputs.registry }}'
+          echo 'image_tag: ${{ inputs.image_tag }}'
+          echo 'project_name: ${{ inputs.project_name }}'    
+          echo '::endgroup::'
       - name: Set variables
         run: echo "REGISTRY_BASENAME=$(basename ${{ inputs.registry }})" >> $GITHUB_ENV
       - uses: actions/checkout@v3
@@ -65,5 +59,5 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
-          tags: ${{ env.REGISTRY_BASENAME }}/${{ inputs.project_name }}/${{ inputs.image_name }}:latest, ${{ env.REGISTRY_BASENAME }}/${{ inputs.project_name }}/${{ inputs.image_name }}:${{ env.TAG }}
+          tags: ${{ env.REGISTRY_BASENAME }}/${{ inputs.project_name }}/${{ inputs.image_name }}:latest, ${{ env.REGISTRY_BASENAME }}/${{ inputs.project_name }}/${{ inputs.image_name }}:${{ inputs.image_tag }}
           file: ${{ inputs.dockerfile }}
