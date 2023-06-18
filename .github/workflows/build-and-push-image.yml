@@ -35,6 +35,21 @@ jobs:
     runs-on: ubuntu-latest
     name: "Build Docker image and push"
     steps:
+      - name: Show inputs
+        run: |
+          echo "::group::inputs"
+          echo "image_name: ${{ inputs.image_name }}"
+          echo "dockerfile: ${{ inputs.dockerfile }}"
+          echo "registry: ${{ inputs.registry }}"
+          echo "image_tag: ${{ inputs.image_tag }}"
+          echo "project_name: ${{ inputs.project_name }}"    
+          echo "::endgroup::"
+      - name: Show secrets
+        run: |
+          echo "::group::secrets"
+          echo "REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}"
+          echo "REGISTRY_TOKEN: ${{ secrets.REGISTRY_TOKEN }}" 
+          echo "::endgroup::"
       - name: Set variables
         run: echo "REGISTRY_BASENAME=$(basename ${{ inputs.registry }})" >> $GITHUB_ENV
       - uses: actions/checkout@v3
