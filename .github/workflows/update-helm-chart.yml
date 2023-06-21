@@ -20,6 +20,12 @@ jobs:
     runs-on: ubuntu-latest
     name: "Update helm chart app version"
     steps:
+      - name: Show inputs
+        run: |
+          echo "::group::inputs"
+          echo 'repo: ${{ inputs.repo }}'
+          echo 'app_version: ${{ inputs.app_version }}'
+          echo '::endgroup::'
       - name: Get target repository
         uses: actions/checkout@v3
         with:
