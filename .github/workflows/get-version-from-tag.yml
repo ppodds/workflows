@@ -1,0 +1,26 @@
+name: Get version from tag
+
+on:
+  workflow_call:
+    inputs:
+      tag:
+        type: string
+        required: true
+        description: "The tag label"
+    outputs:
+      version:
+        description: "The version parsed from tag label"
+        value: ${{ jobs.get-version.outputs.version }}
+
+jobs:
+  get-version:
+    runs-on: ubuntu-latest
+    name: "Get version string"
+    outputs:
+      version: ${{ steps.get-version.outputs.version }}
+    steps:
+    - name: Get version string
+      id: get-version
+      run: |
+        tag=${{github.event.release.tag_name}}
+        echo "version=${tag:1}" >> $GITHUB_OUTPUT
