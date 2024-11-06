@@ -27,7 +27,7 @@ jobs:
           echo 'app_version: ${{ inputs.app_version }}'
           echo '::endgroup::'
       - name: Get target repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: ${{ inputs.repo }}
           token: ${{ secrets.TOKEN }}
